@@ -29,15 +29,15 @@ def get_last_message(chat_name):
         EC.presence_of_element_located((By.XPATH, chat_xpath))
     )
     chat_element.click()
-
+    input("Selected chat, press Enter to continue...")
     # Wait for the chat to load
     WebDriverWait(driver, 30).until(
         EC.presence_of_element_located((By.CLASS_NAME, 'message-in'))
     )
 
     # Get the last message
-    messages = driver.find_element("name", 'message-in')
-    last_message = messages[-1].driver.find_element("name", 'selectable-text').text
+    messages = driver.find_elements(By.CLASS_NAME, 'message-in')
+    last_message = messages[-1].find_elements(By.CLASS_NAME, 'selectable-text')[-1].text
 
     return last_message
 
@@ -46,6 +46,8 @@ chat_name = "Daniel"  # Replace with the name of the chat you want to retrieve m
 last_message = get_last_message(chat_name)
 print(f"Last message in '{chat_name}': {last_message}")
 
+input("Done, press Enter to close...")
 # Close the browser
+
 driver.quit()
 
