@@ -1,14 +1,34 @@
 from openai import OpenAI
 import keys
-client = OpenAI(api_key = keys.KEY_OPENAI)
 
-response = client.chat.completions.create(
-  model="gpt-3.5-turbo",
-  messages=[
-    {"role": "system", "content": "You are writing python code"},
-    {"role": "user", "content": "Make code about a: stack class"},
 
-  ]
-)
+class ai:
 
-print(response.choices[0].message.content)
+    client = OpenAI(api_key = keys.KEY_OPENAI)
+
+    response = None
+
+    log = {}
+
+    def __init__(self, context, prompt):
+        self.response = self.client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": context},
+            ]
+        )
+
+        self.log = [{"role": "system", "content": context},
+           ]
+        
+            
+    def user_response(self, prompt):
+        self.log.append({"role": "user", "content": prompt})
+
+
+        self.response = self.client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=self.log
+        )
+
+        print(self.response.choices[-1].message.content)
