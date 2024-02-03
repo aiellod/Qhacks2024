@@ -1,15 +1,14 @@
-import openai
+from openai import OpenAI
+import keys
+client = OpenAI(api_key = keys.KEY_OPENAI)
 
-# Set your API key
-openai.api_key = 'YOUR_API_KEY'
+response = client.chat.completions.create(
+  model="gpt-3.5-turbo",
+  messages=[
+    {"role": "system", "content": "You are writing python code"},
+    {"role": "user", "content": "Make code about a: stack class"},
 
-# Generate text using the OpenAI API
-response = openai.Completion.create(
-    engine="text-davinci-003",  # You can use other engines as well
-    prompt="Write a Python script to",
-    max_tokens=100
+  ]
 )
 
-# Print the generated text
-print(response['choices'][0]['text'])
-
+print(response.choices[0].message.content)
