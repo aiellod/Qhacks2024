@@ -161,3 +161,6 @@ cython_debug/
 
 #API KEYS
 keys.py
+
+#webdrivers
+msedgedriver.exe
