@@ -12,15 +12,15 @@ import os
 from selenium.webdriver.edge.service import Service
 from selenium.webdriver.edge.options import Options
 from selenium.webdriver.common.keys import Keys
+from localvars import WEBDRIVERPATH
 
 #Setup global consants
-project_path = os.path.dirname(os.path.abspath(__file__))
-executable_path = project_path + '\\msedgedriver.exe'
+WebDriverPath = WEBDRIVERPATH
 chat_name = "Daniel" #replace wih the testing chat
 
 # Create a new instance of the Edge driver
 options = Options()
-driver = webdriver.Edge(service=Service(executable_path), options=options)
+driver = webdriver.Edge(service=Service(WebDriverPath), options=options)
 
 
 # Function to initialize the WhatsApp web client and reader

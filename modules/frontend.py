@@ -34,16 +34,12 @@ class MyFloatLayoutApp(App):
                          pos_hint={"x": 0.1, "y": 0.3})
         button1.bind(on_enter=self.show_tooltip)
         layout.add_widget(button1)
-
+    
         return layout
 
-    def show_tooltip(self, instance):
-        # Get the position of the button
-        x, y = instance.to_window(instance.center_x, instance.center_y)
+    def show_tooltip():
+        process = Popen(['python3', 'settings.py'], stdout=PIPE, stderr=PIPE)
 
-        # Create and show the tooltip popup at the calculated position
-        tooltip_popup = TooltipPopup(title="Tooltip", content=Label(text="This is a tooltip!"))
-        tooltip_popup.open(x=x, y=y)
 
 if __name__ == '__main__':
     MyFloatLayoutApp().run()
