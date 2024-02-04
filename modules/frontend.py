@@ -18,7 +18,7 @@ class MyFloatLayoutApp(App):
         layout = FloatLayout()
 
         # Set the background image
-        bg_image = Image(source='bg.jpeg', allow_stretch=True, keep_ratio=False)
+        bg_image = Image(source='assets/bg.jpeg', allow_stretch=True, keep_ratio=False)
         layout.add_widget(bg_image)
 
         # Create a small text input
@@ -28,11 +28,11 @@ class MyFloatLayoutApp(App):
         # Create a small button
         button1 = Button(text="Push Me!",
                          color=(1, 0, .65, 1),
-                         background_normal='button-unpressed.png',
+                         background_normal='assets/button-unpressed.png',
                          background_down='down.png',
                          size_hint=(.3, .3),
                          pos_hint={"x": 0.1, "y": 0.3})
-        button1.bind(on_enter=self.show_tooltip)
+        button1.bind(on_press=self.show_tooltip)
         layout.add_widget(button1)
     
         return layout
