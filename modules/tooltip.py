@@ -1,6 +1,5 @@
 import tkinter as tk
 import settings
-import settings
 from time import sleep
 
 class Tooltip:
