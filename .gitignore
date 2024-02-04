@@ -164,3 +164,4 @@ localvars.py
 
 #webdrivers
 msedgedriver.exe
+modules/localvars.py

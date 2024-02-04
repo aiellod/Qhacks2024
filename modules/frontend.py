@@ -2,7 +2,7 @@ from pathlib import Path
 from tkinter import Tk, Canvas, Frame, Label, Entry, Button, PhotoImage
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"/Users/danielaiello/Desktop/Qhacks2024/assets")
+ASSETS_PATH = OUTPUT_PATH / Path()
 
 
 def relative_to_assets(path: str) -> Path:
