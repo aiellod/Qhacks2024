@@ -1,6 +1,7 @@
 from pathlib import Path
 from tkinter import Tk, Canvas, Frame, Label, Entry, Button, PhotoImage
 import localvars
+import ai as gpt
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = localvars.ASSETS_PATH
@@ -8,6 +9,8 @@ ASSETS_PATH = localvars.ASSETS_PATH
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
+
+bot = gpt.ai("whatever prompts are given to you, keep the response exactly 1000 characters.", "")
 
 
 class GUI:
@@ -46,6 +49,7 @@ class GUI:
         frame.place(relx=0.5, rely=0.5, anchor="center", width=300, height=150)
 
         # Add a label for the prompt with transparency
+        
         prompt_label = Label(
             frame,
             text="Prompt:",
@@ -58,6 +62,7 @@ class GUI:
         prompt_label.place(x=10, y=10)
 
         # Add a transparent entry widget for input
+        global prompt_entry
         prompt_entry = Entry(
             frame,
             font=("Segoe UI", 12),  # Fluent design-inspired font
@@ -88,12 +93,13 @@ class GUI:
 
         button_1 = Button(
             window,
-            image=resized_image,
+            # image=resized_image,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: print(f"Prompt entered: {prompt_entry.get()}"),
+            command=lambda: bot.user_response(prompt_entry.get()),
             relief="ridge"
-        )
+)
+
         button_1.place(relx=0.5, rely=0.8, anchor="center", width=100, height=100)
 
         gradient_canvas.create_text(
@@ -106,6 +112,11 @@ class GUI:
         )
 
         self.window = window
+
+    def printInput(self): 
+        inp = prompt_entry.get()
+        print(inp)
+
 
     
         
