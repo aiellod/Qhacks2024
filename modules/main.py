@@ -1,7 +1,6 @@
 import ai, frontend, whatsapp, tooltip, keyintercept, settings
 import keyboard
 import tkinter as tk
-import pynput
 
 #frontend.MyFloatLayoutApp().run()
 def toggle_enabled():
@@ -20,7 +19,7 @@ def init():
     keyintercept.init()
 
     #Make Frontend
-    ui = tk.Tk()
+    ui = frontend.GUI().window
     
     #Bind hotkeys
     #Enabled toggle

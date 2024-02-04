@@ -34,7 +34,6 @@ def show_tooltip_at_cursor(tt, root):
         message = "Replying"
     else:
         message = "Reading"
-    print(tooltipVisible)
     tt.show_tooltip(x, y-50, message, tooltipVisible)
     tooltipVisible = not tooltipVisible
 
