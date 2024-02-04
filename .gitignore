@@ -161,7 +161,8 @@ cython_debug/
 
 #API KEYS and local stuff
 localvars.py
+modules/localvars.py
 
 #webdrivers
 msedgedriver.exe
-modules/localvars.py
+
