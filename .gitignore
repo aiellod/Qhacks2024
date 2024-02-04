@@ -159,8 +159,8 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-#API KEYS
-keys.py
+#API KEYS and local stuff
+localvars.py
 
 #webdrivers
 msedgedriver.exe

@@ -1,10 +1,10 @@
 from openai import OpenAI
-import keys
+import modules.localvars as localvars
 
 
 class ai:
 
-    client = OpenAI(api_key = keys.KEY_OPENAI)
+    client = OpenAI(api_key = localvars.KEY_OPENAI)
 
     response = None
 
