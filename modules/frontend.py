@@ -10,7 +10,7 @@ ASSETS_PATH = localvars.ASSETS_PATH
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
-bot = gpt.ai("whatever prompts are given to you, keep the response exactly 1000 characters.", "")
+bot = gpt.ai("Do not show me anything other than what I ask. I do not want you to say any preamble before or after the content I ask for", "")
 
 
 class GUI:
@@ -42,7 +42,7 @@ class GUI:
         # Create a transparent frame for organization
         frame = Frame(
             window,
-            bg="#FFA500",  # Orange color
+            bg="#404040", 
             bd=2,  # Borderwidth
             relief="ridge"  # Relief type for the border
         )
@@ -53,7 +53,7 @@ class GUI:
         prompt_label = Label(
             frame,
             text="Prompt:",
-            bg="#FFA500",  # Orange color
+            bg="#404040", 
             font=("Segoe UI", 12),  # Fluent design-inspired font
             justify="left",
             fg="white",  # White text

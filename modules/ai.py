@@ -1,5 +1,6 @@
 from openai import OpenAI
 import localvars
+import settings
 
 
 class ai:
@@ -23,6 +24,7 @@ class ai:
         
             
     def user_response(self, prompt):
+        prompt = "Make me a " + prompt + " and show me just this without any additional words for context"
         self.log.append({"role": "user", "content": prompt})
 
 
@@ -31,4 +33,8 @@ class ai:
             messages=self.log
         )
 
-        print(self.response.choices[-1].message.content)
+        response = self.response.choices[-1].message.content
+        print(response)
+
+        for char in response:
+            settings.KeyQueue.put(char)

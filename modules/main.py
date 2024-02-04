@@ -29,10 +29,6 @@ def init():
     tt = tooltip.Tooltip(ui.window, "")
     keyboard.add_hotkey(settings.BIND_TOOLTIP, ui.window.after, args=(0, tooltip.show_tooltip_at_cursor, tt, ui.window))
     #Cancel tooltip with mouse movement
-    
-    testmsg = "Hello world! This is a test message. Adding more content to see how it handles it."
-    for char in testmsg:
-        settings.KeyQueue.put(char)
 
     ui.window.mainloop()
     

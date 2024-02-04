@@ -25,14 +25,9 @@ def init():
         settings.KeyQueue.put(char)
 
     ui.window.mainloop()
-    
-
 
 def main():
     init()
-
-    
-
 
 
 main()
