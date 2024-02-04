@@ -2,7 +2,6 @@ import ai, frontend, whatsapp, tooltip, keyintercept, settings
 import keyboard
 import tkinter as tk
 
-#frontend.MyFloatLayoutApp().run()
 def toggle_enabled():
     settings.enabled = not settings.enabled
     print(f"Enabled: {settings.enabled}")
@@ -15,11 +14,11 @@ def toggle_replying():
 def init():
     #Initialize all modules
     settings.init()
-    #whatsapp.init()
+    whatsapp.init()
     keyintercept.init()
 
     #Make Frontend
-    ui = frontend.GUI().window
+    ui = frontend.GUI()
     
     #Bind hotkeys
     #Enabled toggle
@@ -27,18 +26,16 @@ def init():
     #Mode Toggle
     keyboard.add_hotkey(settings.BIND_TOGGLE_MODE, toggle_replying)
     #Tooltip Toggle
-    tt = tooltip.Tooltip(ui, "")
-    keyboard.add_hotkey(settings.BIND_TOOLTIP, ui.after, args=(0, tooltip.show_tooltip_at_cursor, tt, ui))
+    tt = tooltip.Tooltip(ui.window, "")
+    keyboard.add_hotkey(settings.BIND_TOOLTIP, ui.window.after, args=(0, tooltip.show_tooltip_at_cursor, tt, ui.window))
     #Cancel tooltip with mouse movement
     
-    testmsg = "Hello world! This is a test message."
+    testmsg = "Hello world! This is a test message. Adding more content to see how it handles it."
     for char in testmsg:
         settings.KeyQueue.put(char)
 
-    ui.mainloop()
+    ui.window.mainloop()
     
-
-
 def main():
     init()
 

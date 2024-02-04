@@ -12,19 +12,22 @@ import os
 from selenium.webdriver.edge.service import Service
 from selenium.webdriver.edge.options import Options
 from selenium.webdriver.common.keys import Keys
+from time import sleep
 from localvars import WEBDRIVERPATH
 
 
 #Setup global consants
 chat_name = "Daniel" #replace wih the testing chat
-
-# Create a new instance of the Edge driver
-options = Options()
-driver = webdriver.Edge(service=Service(WEBDRIVERPATH), options=options)
+driver = None
 
 
 # Function to initialize the WhatsApp web client and reader
 def init():
+    global driver
+    # Create a new instance of the Edge driver
+    options = Options()
+    driver = webdriver.Edge(service=Service(WEBDRIVERPATH), options=options)
+
     # Open WhatsApp Web
     driver.get("https://web.whatsapp.com/")
 
@@ -40,10 +43,11 @@ def init():
         EC.presence_of_element_located((By.XPATH, chat_xpath))
     )
     chat_element.click()
-    input("Selected chat, press Enter to continue...")
+    sleep(1)
 
 # Function to get the last message from a specific chat
 def get_last_message():
+    global driver
     # Make sure chat is loaded and get message
     WebDriverWait(driver, 30).until(
         EC.presence_of_element_located((By.CLASS_NAME, 'message-in')) #whatsapp recieved message class
@@ -56,6 +60,7 @@ def get_last_message():
     return last_message
 
 def send_message(message):
+    global driver
     # Find find the text field to type the message into
     text_field = driver.find_element(By.XPATH, '//*[@title="Type a message"]')
 

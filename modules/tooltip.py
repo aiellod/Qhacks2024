@@ -1,6 +1,7 @@
 import tkinter as tk
 import settings
 from time import sleep
+import whatsapp
 
 class Tooltip:
     def __init__(self, parent, text):
@@ -30,10 +31,12 @@ tooltipVisible = True
 def show_tooltip_at_cursor(tt, root):
     global tooltipVisible
     x, y = root.winfo_pointerxy()
-    if settings.ReplyMode == True:
-        message = "Replying"
-    else:
-        message = "Reading"
+    message = " "
+    if tooltipVisible:
+        if settings.ReplyMode == True:
+            message = settings.SendMessage
+        else:
+            message = whatsapp.get_last_message()
     tt.show_tooltip(x, y-50, message, tooltipVisible)
     tooltipVisible = not tooltipVisible
 

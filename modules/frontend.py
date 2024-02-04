@@ -14,7 +14,7 @@ class GUI:
     def __init__(self):
         window = Tk()
         window.geometry("400x500")
-        window.title("Nice Tkinter Frontend")
+        window.title("SneaQy")
 
         # Create a gradient canvas with a darker pink color
         gradient_canvas = Canvas(

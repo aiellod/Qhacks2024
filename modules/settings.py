@@ -10,6 +10,8 @@ def init():
     global enabled
     global ReplyMode #True in typing mode, false in read mode
     global KeyQueue
+    global SendMessage
     enabled = True
     ReplyMode = True
     KeyQueue = queue.Queue()
+    SendMessage = ""

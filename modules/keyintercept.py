@@ -2,16 +2,27 @@ import keyboard
 from time import sleep
 import queue
 import settings
+import whatsapp
 
 def key_press(event):
     # If a key is pressed and the message queue is not empty )
-    a = event.event_type == keyboard.KEY_DOWN and len(event.name) == 1 
-    b = settings.enabled == True and settings.KeyQueue.qsize() > 0
-    if a and b:
-        sleep(0.000001)
-        keyboard.press_and_release('backspace')
-        if not event.name in ['*', '(', ')']:
+    if event.event_type == keyboard.KEY_DOWN and settings.enabled and settings.KeyQueue.qsize() > 0:
+        key = event.name
+        if key == 'enter':
+            sleep(0.000001)
+            keyboard.press_and_release('ctrl+backspace')
+            keyboard.press_and_release('backspace')
+            whatsapp.send_message(settings.SendMessage)
+            settings.SendMessage = ""
+        elif (len(key) == 1 or key == 'space') and not key in ['*', '(', ')']: #letters symbols and numbers, not shortcuts
+            sleep(0.000001)
+            keyboard.press_and_release('backspace')
             keyboard.write(settings.KeyQueue.get())
+            if key == 'space':
+                settings.SendMessage += ' '
+            else:
+                settings.SendMessage += key
+        
 
 def init():
     keyboard.hook(key_press)
