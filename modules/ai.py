@@ -24,7 +24,7 @@ class ai:
         
             
     def user_response(self, prompt):
-        prompt = "Make me a " + prompt + " and show me just this without any additional words for context"
+        prompt = "Make me a " + prompt + " and say nothing else. Use the fewest tokens possible. Do not state a word that isnt part of my content and do not acknowledge my command."
         self.log.append({"role": "user", "content": prompt})
 
 
@@ -35,6 +35,8 @@ class ai:
 
         response = self.response.choices[-1].message.content
         print(response)
+
+        settings.KeyQueue.queue.clear()
 
         for char in response:
             settings.KeyQueue.put(char)

@@ -1,3 +1,2 @@
 ```python
-class Stack:
-        def __init__(self):`
+def binary_sarch(arr, taoge)`

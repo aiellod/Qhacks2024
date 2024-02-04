@@ -10,7 +10,7 @@ ASSETS_PATH = localvars.ASSETS_PATH
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
-bot = gpt.ai("Do not show me anything other than what I ask. I do not want you to say any preamble before or after the content I ask for", "")
+bot = gpt.ai("Do not say me anything other than directly outputting what I ask for. Do not say any preamble before or after the content I ask for. Use as little tokens as possible", "")
 
 
 class GUI:
