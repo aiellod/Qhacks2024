@@ -1,5 +1,5 @@
 from openai import OpenAI
-import modules.localvars as localvars
+import localvars
 
 
 class ai:
