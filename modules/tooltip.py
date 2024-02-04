@@ -23,8 +23,10 @@ class Tooltip:
             self.tooltip_window.wm_geometry(f"+{2000}+{2000}")
         self.tooltip_window.attributes('-topmost', True)  # Keep the tooltip on top of all other windows
 
-        label = tk.Label(self.tooltip_window, text=self.text, background="#ffffe0", relief="solid", borderwidth=1)
-        label.pack(ipadx=2, ipady=2)
+        border_color = tk.Frame(self.tooltip_window, background="#404040", highlightbackground="#404040", bd=1)
+        label = tk.Label(border_color, text=self.text, background="#232323", relief="solid", borderwidth=0, foreground="#FFFFFF", font=("Courier New", 10))
+        label.pack(ipadx=8, ipady=6)
+        border_color.pack(ipadx=0, ipady=0)
         
         
 tooltipVisible = True
@@ -42,12 +44,12 @@ def show_tooltip_at_cursor(tt, root):
 
 if __name__ == "__main__":
     settings.init()
+    settings.SendMessage = "Hello world!"
     root = tk.Tk()
-    root.attributes("-alpha", 0.0)
-    sleep(2)
-    show_tooltip_at_cursor(root)
+    tt = Tooltip(root, "Testing")
+    sleep(1)
+    show_tooltip_at_cursor(tt, root)
     print("Tooltip should be visible")
-    sleep(2)
     root.mainloop()
 
 
