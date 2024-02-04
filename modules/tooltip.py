@@ -1,4 +1,7 @@
 import tkinter as tk
+import settings
+import settings
+from time import sleep
 
 class Tooltip:
     def __init__(self, parent, text):
@@ -16,20 +19,27 @@ class Tooltip:
 
         label = tk.Label(self.tooltip_window, text=self.text, background="#ffffe0", relief="solid", borderwidth=1)
         label.pack(ipadx=2, ipady=2)
-        
 
-def on_timer():
+def make_and_show_tooltip(root):
+    if settings.ReplyMode == True:
+        message = "Replying"
+    else:
+        message = "Reading"
+
+    tooltip = Tooltip(root, message)
     x, y = root.winfo_pointerxy()
     tooltip.show_tooltip(x, y-50)
+    print("Tooltip should be visible")
+
 
 if __name__ == "__main__":
+    settings.init()
     root = tk.Tk()
-    tooltip = Tooltip(root, "This is a tooltip!")
-
-    # Set the main window initially invisible
     root.attributes("-alpha", 0.0)
-
-    # Schedule the timer to trigger after 3 seconds
-    root.after(3000, on_timer)
-
+    sleep(2)
+    make_and_show_tooltip(root)
+    print("Tooltip should be visible")
     root.mainloop()
+
+
+
