@@ -1,4 +1,5 @@
 import tkinter as tk
+from time import sleep
 
 class Tooltip:
     def __init__(self, parent, text):
@@ -21,6 +22,7 @@ class Tooltip:
 def on_timer():
     x, y = root.winfo_pointerxy()
     tooltip.show_tooltip(x, y-50)
+    
 
 if __name__ == "__main__":
     root = tk.Tk()
@@ -30,6 +32,10 @@ if __name__ == "__main__":
     root.attributes("-alpha", 0.0)
 
     # Schedule the timer to trigger after 3 seconds
-    root.after(3000, on_timer)
+    sleep(2)
+
+    x, y = root.winfo_pointerxy()
+    tooltip.show_tooltip(x, y-50)
+    print("Tooltip should be visible")
 
     root.mainloop()
