@@ -46,13 +46,13 @@ class GUI:
             bd=2,  # Borderwidth
             relief="ridge"  # Relief type for the border
         )
-        frame.place(relx=0.5, rely=0.5, anchor="center", width=300, height=150)
+        frame.place(relx=0.5, rely=0.5, anchor="center", width=300, height=140)
 
         # Add a label for the prompt with transparency
         
         prompt_label = Label(
             frame,
-            text="Prompt:",
+            text="What are you working on?",
             bg="#404040", 
             font=("Segoe UI", 12),  # Fluent design-inspired font
             justify="left",
@@ -82,32 +82,37 @@ class GUI:
             50,
             anchor="center",
             text="sneaQy",
-            fill="#FFFFFF",  # White text
+            fill="black",  # Black text
             font=("Segoe UI", 30, "bold"),  # Larger and bold
             justify="center"
         )
 
         # Add a glowing effect to "sneaQy"
-        gradient_canvas.itemconfig(sneaQy_text, font=("Segoe UI", 30, "bold"), fill="#FFFFFF")  # Gold color for glow
+        gradient_canvas.itemconfig(sneaQy_text, font=("Segoe UI", 30, "bold"), fill="black")  # Gold color for glow
         gradient_canvas.itemconfig(sneaQy_text, tag="glow")
 
         button_1 = Button(
-            window,
+            frame,
             # image=resized_image,
             borderwidth=0,
             highlightthickness=0,
+            width=200,
+            height=50,
+            bg="#6BA5FF",
+            text="Go SneaQy!",
             command=lambda: bot.user_response(prompt_entry.get()),
             relief="ridge"
-)
+        )
 
-        button_1.place(relx=0.5, rely=0.8, anchor="center", width=100, height=100)
+
+        button_1.place(relx=0.5, rely=0.75, anchor="center", width=200, height=50)
 
         gradient_canvas.create_text(
             200,
             150,
             anchor="center",
             text="Created by Daniel Aiello and Ryan Scomazzon",
-            fill="white",  # White text
+            fill="black",  # White text
             font=("Segoe UI", 10)  # Fluent design-inspired font
         )
 
@@ -116,9 +121,6 @@ class GUI:
     def printInput(self): 
         inp = prompt_entry.get()
         print(inp)
-
-
-    
         
 
 if __name__ == "__main__":

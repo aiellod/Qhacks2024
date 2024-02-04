@@ -12,6 +12,6 @@ def init():
     global KeyQueue
     global SendMessage
     enabled = True
-    ReplyMode = True
+    ReplyMode = False
     KeyQueue = queue.Queue()
     SendMessage = ""
