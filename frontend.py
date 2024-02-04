@@ -1,43 +1,49 @@
 from kivy.app import App
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.label import Label
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.textinput import TextInput
+from kivy.uix.button import Button
+from kivy.uix.image import Image
 from kivy.uix.popup import Popup
+from kivy.uix.label import Label
 
-class CustomNotification(App):
+class TooltipPopup(Popup):
+    def __init__(self, **kwargs):
+        super(TooltipPopup, self).__init__(**kwargs)
+        self.size_hint = (None, None)
+        self.size = (200, 100)
+
+class MyFloatLayoutApp(App):
     def build(self):
-        # Create the main layout
-        layout = BoxLayout(orientation='vertical', padding=10, spacing=10)
+        # Create a FloatLayout
+        layout = FloatLayout()
 
-        # Create a label inside the layout
-        label = Label(text="This is a custom notification.", font_size=18)
-        layout.add_widget(label)
+        # Set the background image
+        bg_image = Image(source='bg.jpeg', allow_stretch=True, keep_ratio=False)
+        layout.add_widget(bg_image)
 
-        # Bind the on_touch_down and on_touch_move events
-        layout.bind(on_touch_down=self.on_touch_down)
-        layout.bind(on_touch_move=self.on_touch_move)
+        # Create a small text input
+        text_input = TextInput(text='Enter text here', size_hint=(None, None), height=30, pos_hint={'center_x': 0.5, 'center_y': 0.8})
+        layout.add_widget(text_input)
+
+        # Create a small button
+        button1 = Button(text="Push Me!",
+                         color=(1, 0, .65, 1),
+                         background_normal='button-unpressed.png',
+                         background_down='down.png',
+                         size_hint=(.3, .3),
+                         pos_hint={"x": 0.1, "y": 0.3})
+        button1.bind(on_enter=self.show_tooltip)
+        layout.add_widget(button1)
 
         return layout
 
-    def on_touch_down(self, instance, touch):
-        # Check if the touch is inside the layout
-        if instance.collide_point(*touch.pos):
-            # Store the initial touch position for calculating movement
-            touch.ud['start_pos'] = touch.pos
-            return True
+    def show_tooltip(self, instance):
+        # Get the position of the button
+        x, y = instance.to_window(instance.center_x, instance.center_y)
 
-    def on_touch_move(self, instance, touch):
-        # Check if the touch is inside the layout and has a starting position
-        if instance.collide_point(*touch.pos) and 'start_pos' in touch.ud:
-            # Calculate the movement offset
-            dx = touch.pos[0] - touch.ud['start_pos'][0]
-            dy = touch.pos[1] - touch.ud['start_pos'][1]
+        # Create and show the tooltip popup at the calculated position
+        tooltip_popup = TooltipPopup(title="Tooltip", content=Label(text="This is a tooltip!"))
+        tooltip_popup.open(x=x, y=y)
 
-            # Update the window position based on the movement offset
-            App.get_running_app().root_window.position = (App.get_running_app().root_window.x + dx,
-                                                           App.get_running_app().root_window.y + dy)
-
-            # Update the starting position for the next movement
-            touch.ud['start_pos'] = touch.pos
-
-if __name__ == "__main__":
-    CustomNotification().run()
+if __name__ == '__main__':
+    MyFloatLayoutApp().run()
